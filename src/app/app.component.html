@@ -1,0 +1,62 @@
+
+<form [formGroup]="userform" (ngSubmit)="onSubmit()">
+  <div>
+    <label>name:</label>
+    <input formControlName="name" required>
+  </div>
+  <div>
+    <label>email:</label>
+    <input formControlName="email" required>
+  </div>
+ 
+  <div>
+    <label>age:</label>
+    <input formControlName="age" type="number" required>
+  </div>
+
+  
+ 
+  <button *ngIf="isSubmiited"   type="submit">Submit</button>
+</form>
+
+<button *ngIf="isupdated"  type="btn btn-primary" (click)="Updateform()" >Update</button>
+<hr>
+<hr>
+
+<div class="container">
+  <h2>Data list</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>email</th>
+        <th>age</th>
+        <th>Created_Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{user.age}}</td>
+       <td>{{user.createDate}}</td>
+       
+        <td>
+          <button (click)="editclick(user)"  class="btn btn-primary">Edit</button>
+          <button (click)="Deleteuser(user.id)" class="btn btn-danger">Delete</button>
+        </td>
+        <div *ngIf="user.id== showbuttonid">
+          <button  (click)="Deleteuser" class="btn btn-danger">OK</button>
+          <button   class="btn btn-primary">Cancel</button> 
+        </div>
+        
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<router-outlet />
